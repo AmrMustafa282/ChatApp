@@ -16,7 +16,7 @@ export default function ChatPresence() {
     for (const id in channel.presenceState()) {
      // @ts-ignore
      userIds.push(channel.presenceState()[id][0].user_id);
-    } 
+    }
     setOnlineUsers([...new Set(userIds)].length);
    })
    .subscribe(async (status) => {
@@ -27,7 +27,7 @@ export default function ChatPresence() {
      });
     }
    });
- }, [user]);
+ }, [ user]);
 
  if (!user) {
   return <div className=" h-3 w-1"></div>;
