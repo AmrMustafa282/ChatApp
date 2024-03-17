@@ -59,3 +59,35 @@
     @apply bg-background text-foreground;
   }
 }
+
+body{
+  overflow: hidden;
+}
+
+.cont {
+  position: relative;
+
+  /* Add padding on the right side to make space for the scrollbar */
+  padding-right: 20px; 
+}
+
+.cont::-webkit-scrollbar {
+  width: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cont::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.cont::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

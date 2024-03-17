@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { Input } from "./ui/input";
 import { supabaseBrowser } from "@/lib/supabase/browser";
@@ -11,11 +10,13 @@ import { Message, useMessage } from "@/lib/store/messages";
 export default function ChatInput() {
  const user = useUser((state) => state.user);
  const addMessage = useMessage((state) => state.addMessage);
-
+ const setOptimisticIds = useMessage((state) => state.setOptimisticIds);
+ const supabase = supabaseBrowser();
  const handleSendMessage = async (text: string) => {
   if (text.trim()) {
+   const id = uuidv4();
    const newMessage = {
-    id: uuidv4(),
+    id,
     text,
     send_by: user?.id,
     is_edit: false,
@@ -28,20 +29,20 @@ export default function ChatInput() {
     },
    };
    addMessage(newMessage as Message);
-   const supabase = supabaseBrowser();
-   const { error } = await supabase.from("messages").insert({ text });
+   setOptimisticIds(newMessage.id);
+   const { error } = await supabase.from("messages").insert({ text, id });
    if (error) {
     toast.error(error.message);
    }
   } else {
-    toast.error('Message can not be empty!!')
+   toast.error("Message can not be empty!!");
   }
  };
 
  return (
   <div className="p-5">
    <Input
-    placeholder="send message ..."
+    placeholder="send message"
     onKeyDown={(e) => {
      if (e.key === "Enter") {
       handleSendMessage(e.currentTarget.value);

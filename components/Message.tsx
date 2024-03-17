@@ -15,7 +15,6 @@ import { MoreHorizontal } from "lucide-react";
 import { useUser } from "@/lib/store/user";
 
 export default function MessageItem({ message }: { message: Message }) {
-  const now = moment();
  const user = useUser((state) => state.user);
  return (
   <div className="flex gap-2">

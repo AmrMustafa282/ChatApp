@@ -28,6 +28,7 @@
     "react-dom": "^18",
     "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
+    "tailwind-scrollbar": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1",
     "zustand": "^4.5.2"
