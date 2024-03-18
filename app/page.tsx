@@ -44,7 +44,7 @@ export default async function Page() {
         user_chats={user_chats} users={users} filteredUsers={filteredUsers}
         mainUser={data.session.user}
        />
-       <div className="col-span-2 flex flex-col">
+       <div className="col-span-2 flex flex-col overflow-y-auto">
         <ChatMessages />
         <ChatInput />
        </div>

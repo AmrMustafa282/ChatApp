@@ -117,7 +117,7 @@ export default function ListMessages() {
     ref={scrollRef}
     onScroll={handleOnScroll}
    >
-    <div className="flex-1 pb-5 ">
+    <div className="flex-1 pb-5  ">
      <LoadMoreMessages />
     </div>
     <div className=" space-y-7">
