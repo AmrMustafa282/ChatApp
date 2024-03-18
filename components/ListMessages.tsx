@@ -142,7 +142,7 @@ export default function ListMessages() {
       </div>
      ) : (
       <div
-       className="absolute bottom-8 right-8  w-12 h-12 bg-blue-500 rounded-md justify-center items-center flex mx-auto border cursor-pointer hover:scale-110 transition-all "
+       className="absolute bottom-8 right-16  w-12 h-12  rounded-md justify-center items-center flex mx-auto border cursor-pointer hover:scale-110 transition-all "
        onClick={scrollDown}
       >
        <ArrowDown />

@@ -31,17 +31,17 @@ export default function MessageItem({ message }: { message: Message }) {
     <div className="flex items-center  justify-between">
      <div className="flex items-center gap-1">
       <h1 className="font-bold">{message.users?.display_name}</h1>
-      <h1 className="text-sm text-gray-400">
+      <h1 className="text-sm dark:text-gray-400 text-gray-800">
        {/* {new Date(message.created_at).toDateString()} */}
        {moment(message.created_at).fromNow()}
            </h1>
            {message.is_edit && 
-           <h1 className="text-sm text-gray-400 underline">edited</h1>
+           <h1 className="text-sm dark:text-gray-400 text-gray-800 underline">edited</h1>
            }
      </div>
      {user?.id === message.send_by && <MessageMenu message={message} />}
     </div>
-    <p className="text-gray-300">{message.text}</p>
+    <p className="dark:text-gray-300 text-gray-800">{message.text}</p>
    </div>
   </div>
  );

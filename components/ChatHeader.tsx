@@ -16,6 +16,7 @@ import { supabaseBrowser } from "@/lib/supabase/browser";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import ChatPresence from "./ChatPresence";
+import { ModeToggle } from "./ui/ToggleTheme";
 
 const ChatHeader = ({ user }: { user: User | undefined }) => {
  const router = useRouter();
@@ -39,47 +40,50 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
    <NavigationMenu>
     <NavigationMenuList>
      <NavigationMenuItem>
-      <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+      <NavigationMenuTrigger>ChatApp</NavigationMenuTrigger>
+      <NavigationMenuContent>
+       <NavigationMenuLink>About</NavigationMenuLink>
+      </NavigationMenuContent>
+     </NavigationMenuItem>
+     <NavigationMenuItem>
+      <NavigationMenuTrigger>Support</NavigationMenuTrigger>
       <NavigationMenuContent>
        <NavigationMenuLink>Link</NavigationMenuLink>
       </NavigationMenuContent>
      </NavigationMenuItem>
      <NavigationMenuItem>
-      <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-      <NavigationMenuContent>
-       <NavigationMenuLink>Link</NavigationMenuLink>
-      </NavigationMenuContent>
-     </NavigationMenuItem>
-     <NavigationMenuItem>
-      <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+      <NavigationMenuTrigger>About</NavigationMenuTrigger>
       <NavigationMenuContent>
        <NavigationMenuLink>Link </NavigationMenuLink>
       </NavigationMenuContent>
      </NavigationMenuItem>
      <NavigationMenuItem></NavigationMenuItem>
     </NavigationMenuList>
-     </NavigationMenu>
+   </NavigationMenu>
 
-       <div className="flex gap-8 w-full justify-end">
-   
+   <div className="flex gap-8 w-full justify-end">
+    <ModeToggle />
 
-     {user ? <>
-    <div className="flex gap-4 items-center ">
-     <img
-      src={user?.user_metadata.avatar_url}
-      alt=""
-      className="w-10 h-10 rounded-full"
-      />
-     <div>
-      <h1>{user?.user_metadata?.email}</h1>
-      <p className="text-sm text-gray-400">@{user?.user_metadata?.user_name}</p>
-     </div>
-    </div>
-     <Button onClick={handleLogout} className="">
-      Logout
-     </Button>
-      </>
-     : (
+    {user ? (
+     <>
+      <div className="flex gap-4 items-center order-first">
+       <img
+        src={user?.user_metadata.avatar_url}
+        alt=""
+        className="w-10 h-10 rounded-full"
+       />
+       <div>
+        <h1>{user?.user_metadata?.email}</h1>
+        <p className="text-sm dark:text-gray-400 text-gray-800">
+         @{user?.user_metadata?.user_name}
+        </p>
+       </div>
+      </div>
+      <Button onClick={handleLogout} className="">
+       Logout
+      </Button>
+     </>
+    ) : (
      <Button onClick={handelLoginWithGithub} className="">
       Login
      </Button>

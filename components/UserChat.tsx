@@ -76,17 +76,14 @@ export default function UserChatItem({
         filteredUser?.display_name
        }
       </h1>
-      <h1 className="text-sm text-gray-400">
-       {/* {new Date(message.created_at).toDateString()} */}
-       {/* {moment(message.created_at).fromNow()} */}3 hours ago
-      </h1>
+    
       {/* {message.is_edit && (
        <h1 className="text-sm text-gray-400 underline">edited</h1>
       )} */}
      </div>
      <MessageMenu user_chat={user_chat} />
     </div>
-    <p className="text-gray-300">
+    <p className="dark:text-gray-300 text-gray-800">
      {/* @ts-ignore */}
      {ls}
     </p>

@@ -68,7 +68,7 @@ export default function UserChatItem({
         <h1 className="font-bold">{user.display_name}</h1>
        </div>
       </div>
-      <p className="text-gray-300 ">I took a bill</p>
+      <p className="dark:text-gray-400 text-gray-800 ">I took a bill</p>
      </div>
      <Plus className="my-auto" onClick={handelAddUser} />
     </>
