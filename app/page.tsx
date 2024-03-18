@@ -7,6 +7,8 @@ import UserChatItem from "@/components/UserChat";
 import InitUser from "@/lib/store/InitUser";
 import { supabaseServer } from "@/lib/supabase/server";
 import React from "react";
+import landing from './assets/landing.png'
+import Image from "next/image";
 
 export default async function Page() {
  const supabase = supabaseServer();
@@ -28,7 +30,6 @@ export default async function Page() {
    filteredUsers.push(user);
   }
  });
- 
 
  return (
   <>
@@ -41,7 +42,7 @@ export default async function Page() {
       <>
        <ListChats
         // @ts-ignore
-        user_chats={user_chats} users={users} filteredUsers={filteredUsers}
+        user_chats={user_chats}users={users}filteredUsers={filteredUsers}
         mainUser={data.session.user}
        />
        <div className="col-span-2 flex flex-col overflow-y-auto">
@@ -50,7 +51,17 @@ export default async function Page() {
        </div>
       </>
      ) : (
-      <ChatAbout />
+      <>
+       <ChatAbout />
+
+       <Image
+        src={landing}
+        alt=""
+        className="w-full h-full col-span-2 object-cover object-left"
+        // width={500}
+        // height={300}
+       />
+      </>
      )}
     </div>
    </div>

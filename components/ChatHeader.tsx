@@ -58,25 +58,28 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
      </NavigationMenuItem>
      <NavigationMenuItem></NavigationMenuItem>
     </NavigationMenuList>
-   </NavigationMenu>
-   <div className="flex gap-8 w-full justify-end">
+     </NavigationMenu>
+
+       <div className="flex gap-8 w-full justify-end">
+   
+
+     {user ? <>
     <div className="flex gap-4 items-center ">
      <img
       src={user?.user_metadata.avatar_url}
       alt=""
       className="w-10 h-10 rounded-full"
-     />
+      />
      <div>
       <h1>{user?.user_metadata?.email}</h1>
       <p className="text-sm text-gray-400">@{user?.user_metadata?.user_name}</p>
      </div>
     </div>
-
-    {user ? (
      <Button onClick={handleLogout} className="">
       Logout
      </Button>
-    ) : (
+      </>
+     : (
      <Button onClick={handelLoginWithGithub} className="">
       Login
      </Button>
