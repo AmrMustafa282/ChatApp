@@ -15,8 +15,8 @@ export default function ListMessages() {
 
  const {
   messages,
-  addMessage,
   optimisticIds,
+  addMessage,
   optimisticDeleteMessage,
   optimisticUpdateMessage,
  } = useMessage((state) => state);

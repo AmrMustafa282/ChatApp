@@ -10,7 +10,7 @@ import React from "react";
 export default async function Page() {
  const supabase = supabaseServer();
  const { data } = await supabase.auth.getSession();
- // const { messages } = await supabase.from("messages").select("*");
+  
 
  return (
   <>

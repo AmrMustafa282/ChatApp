@@ -88,8 +88,8 @@ export const useMessage = create<MessageState>()((set) => ({
    return {
     messages: state.messages.filter((message) => {
      if (message.id === updateMessage.id) {
-      (message.text = updateMessage.text),
-       (message.is_edit = updateMessage.is_edit);
+      message.text = updateMessage.text
+       message.is_edit = updateMessage.is_edit
      }
      return message;
     }),
