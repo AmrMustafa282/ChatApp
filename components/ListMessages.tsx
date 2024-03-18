@@ -42,7 +42,8 @@ export default function ListMessages() {
        const newMessage = {
         ...payload.new,
         users: data,
-       };
+        };
+        //@ts-ignore
        addMessage(newMessage as Message);
       }
      }
