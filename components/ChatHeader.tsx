@@ -25,7 +25,7 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
 
  return (
   <div className="h-20">
-   <div className="p-5  flex items-center justify-between  backdrop-blur-sm  ">
+   <div className="p-5  flex items-center justify-between   ">
     <div>
          <h1 className="text-xl font-bold">Daily Chat</h1>
          <ChatPresence />

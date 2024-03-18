@@ -18,6 +18,7 @@ export type Message = {
 interface MessageState {
  hasMore: boolean;
  page: number;
+ lastMessage: string;
  messages: Message[];
  actionMessage: Message | undefined;
  optimisticIds: string[];
@@ -27,6 +28,8 @@ interface MessageState {
  optimisticUpdateMessage: (message: Message) => void;
  setOptimisticIds: (id: string) => void;
  setMesssages: (messages: Message[]) => void;
+ setChatMessages: (messages: Message[]) => void;
+ setLastMessage: (message: string) => void;
 }
 
 // export const useMessage = create<MessageState>()((set) => ({
@@ -57,18 +60,22 @@ interface MessageState {
 //   }),
 // }));
 
-
 export const useMessage = create<MessageState>()((set) => ({
  hasMore: true,
  page: 1,
  messages: [],
  optimisticIds: [],
  actionMessage: undefined,
+ lastMessage: '',
  setMesssages: (messages) =>
   set((state) => ({
    messages: [...messages, ...state.messages],
    page: state.page + 1,
    hasMore: messages.length >= LIMIT_MESSAGE,
+  })),
+ setChatMessages: (messages) =>
+  set((state) => ({
+   messages: [...messages],
   })),
  setOptimisticIds: (id: string) =>
   set((state) => ({ optimisticIds: [...state.optimisticIds, id] })),
@@ -88,11 +95,15 @@ export const useMessage = create<MessageState>()((set) => ({
    return {
     messages: state.messages.filter((message) => {
      if (message.id === updateMessage.id) {
-      message.text = updateMessage.text
-       message.is_edit = updateMessage.is_edit
+      message.text = updateMessage.text;
+      message.is_edit = updateMessage.is_edit;
      }
      return message;
     }),
    };
   }),
+ setLastMessage: (ls) =>
+  set((state) => ({
+   lastMessage: ls,
+  })),
 }));

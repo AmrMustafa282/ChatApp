@@ -6,11 +6,33 @@ export type Json =
  | { [key: string]: Json | undefined }
  | Json[];
 
-export interface Database {
+export type Database = {
  public: {
   Tables: {
+   chat: {
+    Row: {
+     chat_name: string | null;
+     created_at: string;
+     id: number;
+     lastMessage: string | null;
+    };
+    Insert: {
+     chat_name?: string | null;
+     created_at?: string;
+     id?: number;
+     lastMessage?: string | null;
+    };
+    Update: {
+     chat_name?: string | null;
+     created_at?: string;
+     id?: number;
+     lastMessage?: string | null;
+    };
+    Relationships: [];
+   };
    messages: {
     Row: {
+     chat_id: number | null;
      created_at: string;
      id: string;
      is_edit: boolean;
@@ -18,6 +40,7 @@ export interface Database {
      text: string;
     };
     Insert: {
+     chat_id?: number | null;
      created_at?: string;
      id?: string;
      is_edit?: boolean;
@@ -25,6 +48,7 @@ export interface Database {
      text: string;
     };
     Update: {
+     chat_id?: number | null;
      created_at?: string;
      id?: string;
      is_edit?: boolean;
@@ -33,8 +57,54 @@ export interface Database {
     };
     Relationships: [
      {
-      foreignKeyName: "messages_send_by_fkey";
+      foreignKeyName: "public_messages_chat_id_fkey";
+      columns: ["chat_id"];
+      isOneToOne: false;
+      referencedRelation: "chat";
+      referencedColumns: ["id"];
+     },
+     {
+      foreignKeyName: "public_messages_send_by_fkey";
       columns: ["send_by"];
+      isOneToOne: false;
+      referencedRelation: "users";
+      referencedColumns: ["id"];
+     }
+    ];
+   };
+   user_chat: {
+    Row: {
+     chat_id: number;
+     created_at: string;
+     id: number;
+     other_id: string | null;
+     user_id: string;
+    };
+    Insert: {
+     chat_id: number;
+     created_at?: string;
+     id?: number;
+     other_id?: string | null;
+     user_id?: string;
+    };
+    Update: {
+     chat_id?: number;
+     created_at?: string;
+     id?: number;
+     other_id?: string | null;
+     user_id?: string;
+    };
+    Relationships: [
+     {
+      foreignKeyName: "public_user_chat_chat_id_fkey";
+      columns: ["chat_id"];
+      isOneToOne: false;
+      referencedRelation: "chat";
+      referencedColumns: ["id"];
+     },
+     {
+      foreignKeyName: "public_user_chat_user_id_fkey";
+      columns: ["user_id"];
       isOneToOne: false;
       referencedRelation: "users";
       referencedColumns: ["id"];
@@ -46,23 +116,26 @@ export interface Database {
      avatar_url: string;
      created_at: string;
      display_name: string;
+     friends: string | null;
      id: string;
     };
     Insert: {
      avatar_url: string;
      created_at?: string;
      display_name: string;
-     id: string;
+     friends?: string | null;
+     id?: string;
     };
     Update: {
      avatar_url?: string;
      created_at?: string;
      display_name?: string;
+     friends?: string | null;
      id?: string;
     };
     Relationships: [
      {
-      foreignKeyName: "users_id_fkey";
+      foreignKeyName: "public_users_id_fkey";
       columns: ["id"];
       isOneToOne: true;
       referencedRelation: "users";
@@ -84,7 +157,7 @@ export interface Database {
    [_ in never]: never;
   };
  };
-}
+};
 
 export type Tables<
  PublicTableNameOrOptions extends

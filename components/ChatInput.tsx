@@ -6,11 +6,15 @@ import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@/lib/store/user";
 import { Message, useMessage } from "@/lib/store/messages";
+import { useChat } from "@/lib/store/chats";
 
 export default function ChatInput() {
- const user = useUser((state) => state.user);
- const addMessage = useMessage((state) => state.addMessage);
- const setOptimisticIds = useMessage((state) => state.setOptimisticIds);
+  const user = useUser((state) => state.user);
+  const addMessage = useMessage((state) => state.addMessage);
+  const setLastMessage = useMessage((state) => state.setLastMessage);
+  const setOptimisticIds = useMessage((state) => state.setOptimisticIds);
+  const actionChat = useChat(state=> state.actionChat)
+
  const supabase = supabaseBrowser();
  const handleSendMessage = async (text: string) => {
   if (text.trim()) {
@@ -30,15 +34,19 @@ export default function ChatInput() {
    };
    addMessage(newMessage as Message);
    setOptimisticIds(newMessage.id);
-   const { error } = await supabase.from("messages").insert({ text, id });
+    const { error } = await supabase
+      .from("messages")
+      .insert({ text, id, chat_id: actionChat?.chat_id });
    if (error) {
     toast.error(error.message);
    }
   } else {
    toast.error("Message can not be empty!!");
-  }
+   }
+   setLastMessage(text);
+  //  @ts-ignore
+   await supabase.from("chat").update({ lastMessage: text }).eq("id",actionChat?.chat_id)
  };
-
  return (
   <div className="p-5">
    <Input

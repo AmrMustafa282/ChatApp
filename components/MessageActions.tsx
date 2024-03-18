@@ -27,12 +27,13 @@ import { supabaseBrowser } from "@/lib/supabase/browser";
 import { toast } from "sonner";
 import { useRef } from "react";
 
+
 export function DeleteAlert() {
  const actionMessage = useMessage((state) => state.actionMessage);
  const optimisticDeleteMessage = useMessage(
   (state) => state.optimisticDeleteMessage
  );
-
+ 
  const handelDeleteMessage = async () => {
   const supabase = supabaseBrowser();
   optimisticDeleteMessage(actionMessage?.id!);
@@ -42,6 +43,7 @@ export function DeleteAlert() {
    .eq("id", actionMessage?.id!);
   if (error) toast.error(error.message);
   else toast.success("massage deleted successfully");
+  
  };
 
  return (

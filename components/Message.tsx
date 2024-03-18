@@ -17,7 +17,7 @@ import { useUser } from "@/lib/store/user";
 export default function MessageItem({ message }: { message: Message }) {
  const user = useUser((state) => state.user);
  return (
-  <div className="flex gap-2">
+  <div className="flex gap-2 ">
    <div>
     <Image
      src={message.users?.avatar_url!}

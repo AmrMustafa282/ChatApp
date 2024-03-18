@@ -7,6 +7,7 @@ import { supabaseBrowser } from "@/lib/supabase/browser";
 import { toast } from "sonner";
 import { ArrowDown } from "lucide-react";
 import LoadMoreMessages from "./LoadMoreMessages";
+import { Skeleton } from "./ui/skeleton";
 
 export default function ListMessages() {
  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -119,9 +120,11 @@ export default function ListMessages() {
      <LoadMoreMessages />
     </div>
     <div className=" space-y-7">
-     {messages.map((value, index) => {
-      return <MessageItem key={index} message={value} />;
-     })}
+     {messages.length > 0
+      ? messages.map((value, index) => {
+         return <MessageItem key={value.id} message={value} />;
+        })
+      : generateRandomTimes()}
     </div>
 
     <DeleteAlert />
@@ -149,3 +152,25 @@ export default function ListMessages() {
   </>
  );
 }
+
+const generateRandomTimes = () => {
+ const randomTimes = [];
+ for (let i = 0; i < 4 + Math.random() * 6; i++) {
+  randomTimes.push(i);
+ }
+ return randomTimes.map((index) => (
+  <div key={index} className="flex items-center space-x-4">
+   <Skeleton className="h-12 w-12 rounded-full" />
+   <div className="space-y-2">
+    <Skeleton
+     style={{ width: `${200 + Math.random() * 300}px` }}
+     className="h-4"
+    />
+    <Skeleton
+     style={{ width: `${150 + Math.random() * 250}px` }}
+     className="h-4"
+    />
+   </div>
+  </div>
+ ));
+};
