@@ -21,14 +21,30 @@ export default async function Page() {
 
  //@ts-ignore
  const filteredUsers = [];
-
- user_chats?.forEach((chat) => {
-  //@ts-ignore
-  const user = users?.find((user) => user.id === chat.other_id);
-  if (user) {
+ users?.forEach((user) => {
+  const f_user = user_chats?.find(
+   (user_chat) =>
+    user.id === user_chat.other_id && user.id !== data.session?.user.id
+  );
+  if (f_user) {
    filteredUsers.push(user);
   }
  });
+ //@ts-ignore
+ const findUsers = [];
+ users?.forEach((user) => {
+  const f_user = user_chats?.find(
+   (user_chat) =>
+    user.id !== user_chat.other_id && user.id !== data.session?.user.id
+  );
+  if (f_user) {
+   findUsers.push(user);
+  }
+ });
+
+ // console.log('user_chats',user_chats)
+ // console.log('users', users)
+ // console.log('filterd', filteredUsers)
 
  return (
   <>
@@ -41,8 +57,7 @@ export default async function Page() {
       <>
        <ListChats
         // @ts-ignore
-        user_chats={user_chats}users={users}filteredUsers={filteredUsers}
-        mainUser={data.session.user}
+        user_chats={user_chats}users={users}filteredUsers={filteredUsers}mainUser={data.session.user}findUsers={findUsers}
        />
        <div className="col-span-2 flex flex-col overflow-y-auto">
         <ChatMessages />

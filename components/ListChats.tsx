@@ -14,16 +14,14 @@ export default function ListChats({
  users,
  mainUser,
  filteredUsers,
+ findUsers,
 }: {
  user_chats: Chat[];
  users: User[];
  filteredUsers: IUser[];
  mainUser: User;
+ findUsers:IUser[];
 }) {
-
-  let newUsers = users.forEach((u) => {
-   filteredUsers.filter((fu) => fu.id !== u.id);
-  });
 
 
  return (
@@ -44,11 +42,10 @@ export default function ListChats({
      ))}
     </TabsContent>
     <TabsContent value="find">
-     {users
-      .filter((user) => user.id !== mainUser.id)
+     {findUsers
       .map((user, index) => (
        //@ts-ignore
-       <UserFindItem key={user.id} user={newUsers} mainUser={mainUser} />
+       <UserFindItem key={user.id} user={user} mainUser={mainUser} />
       ))}
     </TabsContent>
    </Tabs>
