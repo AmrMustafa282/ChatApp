@@ -12,7 +12,8 @@ import { Skeleton } from "./ui/skeleton";
 export default function ListMessages() {
  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
  const [userScrolled, setUserScrolled] = useState(false);
- const [notification, setNotification] = useState(0);
+  const [notification, setNotification] = useState(0);
+  const setLastMessage = useMessage(state => state.setLastMessage);
 
  const {
   messages,
@@ -44,7 +45,9 @@ export default function ListMessages() {
         users: data,
         };
         //@ts-ignore
-       addMessage(newMessage as Message);
+        addMessage(newMessage as Message);
+        //@ts-ignore
+        setLastMessage(newMessage );
       }
      }
      const scrollContainer = scrollRef.current;

@@ -18,7 +18,7 @@ export type Message = {
 interface MessageState {
  hasMore: boolean;
  page: number;
- lastMessage: string;
+ lastMessage: Message | undefined;
  messages: Message[];
  actionMessage: Message | undefined;
  optimisticIds: string[];
@@ -29,7 +29,7 @@ interface MessageState {
  setOptimisticIds: (id: string) => void;
  setMesssages: (messages: Message[]) => void;
  setChatMessages: (messages: Message[]) => void;
- setLastMessage: (message: string) => void;
+ setLastMessage: (message: Message) => void;
 }
 
 // export const useMessage = create<MessageState>()((set) => ({
@@ -66,7 +66,7 @@ export const useMessage = create<MessageState>()((set) => ({
  messages: [],
  optimisticIds: [],
  actionMessage: undefined,
- lastMessage: '',
+ lastMessage: undefined,
  setMesssages: (messages) =>
   set((state) => ({
    messages: [...messages, ...state.messages],

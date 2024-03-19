@@ -35,7 +35,7 @@ export const useChat = create<ChatState>()((set) => ({
  setActionChat: (chat) => set(() => ({ actionChat: chat })),
  addChat: (newChats) =>
   set((state) => ({
-   chats: [...state.chats, newChats],
+   chats: [ newChats,...state.chats],
   })),
  optimisticDeleteChat: (chatId) =>
   set((state) => {

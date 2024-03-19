@@ -20,6 +20,7 @@ import { LIMIT_MESSAGE } from "@/lib/constant";
 import { useMessage } from "@/lib/store/messages";
 import { User } from "@supabase/supabase-js";
 import { IUser } from "@/lib/store/user";
+import { Button } from "./ui/button";
 
 export default function UserChatItem({
  user_chat,
@@ -30,9 +31,8 @@ export default function UserChatItem({
 }) {
  const setChatMessages = useMessage((state) => state.setChatMessages);
  const lastMessage = useMessage((state) => state.lastMessage);
-
+ const actionChat = useChat((state) => state.actionChat);
  const setActionChat = useChat((state) => state.setActionChat);
- const [change, setChange] = useState<any>(false);
  // @ts-ignore
  const [ls, setLs] = useState<any>(user_chat.chat.lastMessage);
 
@@ -48,15 +48,25 @@ export default function UserChatItem({
    .order("created_at", { ascending: false });
   setChatMessages(data?.reverse()!);
  };
+ // console.log(lastMessage);
+ //  console.log(user_chat.chat_id);
+ //@ts-ignore
+ //  console.log(lastMessage?.chat_id);
+//  console.log("action chat", actionChat);
 
-     useEffect(() => {
-          if (lastMessage) setLs(lastMessage);
-     },[lastMessage])
-     
+ useEffect(() => {
+  if (lastMessage) {
+   //@ts-ignore
+   if (lastMessage.chat_id === user_chat.chat_id) setLs(lastMessage.text);
+  }
+ }, [lastMessage]);
+
  return (
   <div
    className="flex gap-2 my-3 border shadow-sm  rounded-md p-3 cursor-pointer hover:scale-[1.01] duration-300 transition-all"
-   onClick={handelData}
+   onClick={() => {
+    handelData();
+   }}
   >
    <div>
     <Image
@@ -76,7 +86,7 @@ export default function UserChatItem({
         filteredUser?.display_name
        }
       </h1>
-    
+
       {/* {message.is_edit && (
        <h1 className="text-sm text-gray-400 underline">edited</h1>
       )} */}

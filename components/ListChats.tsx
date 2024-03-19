@@ -20,10 +20,8 @@ export default function ListChats({
  users: User[];
  filteredUsers: IUser[];
  mainUser: User;
- findUsers:IUser[];
+ findUsers: IUser[];
 }) {
-
-
  return (
   <div className="dark:bg-[#18181B] border-r shadow-sm rounded-md  col-span-1 w-full flex flex-col gap-4 py-5 px-4 h-full overflow-y-scroll ">
    <Tabs defaultValue="chats" className="w-full">
@@ -43,6 +41,7 @@ export default function ListChats({
     </TabsContent>
     <TabsContent value="find">
      {findUsers
+      .filter((e) => e.id !== mainUser.id)
       .map((user, index) => (
        //@ts-ignore
        <UserFindItem key={user.id} user={user} mainUser={mainUser} />
