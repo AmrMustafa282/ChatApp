@@ -23,7 +23,7 @@ export default function ListChats({
  findUsers: IUser[];
 }) {
  return (
-  <div className="dark:bg-[#18181B] border-r shadow-sm rounded-md  col-span-1 w-full flex flex-col gap-4 py-5 px-4 h-full overflow-y-scroll ">
+  <div className="dark:bg-[#18181B] border-r shadow-sm rounded-md  col-span-1 w-full flex flex-col gap-4 py-5 px-4 h-full overflow-y-auto cont ">
    <Tabs defaultValue="chats" className="w-full">
     <TabsList>
      <TabsTrigger value="chats">Chats</TabsTrigger>
