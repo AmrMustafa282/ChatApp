@@ -3,11 +3,10 @@ import ChatHeader from "@/components/ChatHeader";
 import ChatInput from "@/components/ChatInput";
 import ChatMessages from "@/components/ChatMessages";
 import ListChats from "@/components/ListChats";
-import UserChatItem from "@/components/UserChat";
 import InitUser from "@/lib/store/InitUser";
 import { supabaseServer } from "@/lib/supabase/server";
 import React from "react";
-import landing from './assets/landing.png'
+import landing from './assets/landing2.png'
 import Image from "next/image";
 
 export default async function Page() {
@@ -57,7 +56,7 @@ export default async function Page() {
        <Image
         src={landing}
         alt=""
-        className="w-full h-full col-span-2 object-cover object-left"
+        className="w-full h-full col-span-2 object-cover "
         // width={500}
         // height={300}
        />

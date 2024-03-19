@@ -2,12 +2,10 @@
 import {
  NavigationMenu,
  NavigationMenuContent,
- NavigationMenuIndicator,
  NavigationMenuItem,
  NavigationMenuLink,
  NavigationMenuList,
  NavigationMenuTrigger,
- NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 
 import React from "react";
@@ -15,8 +13,9 @@ import { Button } from "./ui/button";
 import { supabaseBrowser } from "@/lib/supabase/browser";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import ChatPresence from "./ChatPresence";
 import { ModeToggle } from "./ui/ToggleTheme";
+import { Github, GithubIcon, LucideGithub } from "lucide-react";
+// import { IoLogoGithub } from "react-icons/io5";
 
 const ChatHeader = ({ user }: { user: User | undefined }) => {
  const router = useRouter();
@@ -61,12 +60,12 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
     </NavigationMenuList>
    </NavigationMenu>
 
-   <div className="flex gap-8 w-full justify-end">
+   <div className="flex gap-4 w-full justify-end">
     <ModeToggle />
 
     {user ? (
      <>
-      <div className="flex gap-4 items-center order-first">
+      <div className="flex gap-4 items-center order-first mr-4">
        <img
         src={user?.user_metadata.avatar_url}
         alt=""
@@ -86,6 +85,7 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
     ) : (
      <Button onClick={handelLoginWithGithub} className="">
       Login
+      <Github className="ml-1 h-5 w-5  "/>
      </Button>
     )}
    </div>
